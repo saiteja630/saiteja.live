@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94 44" role="img" aria-label="SAI">
+  <defs>
+    <linearGradient id="gold" x1="8%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#f7edd8" />
+      <stop offset="28%" stop-color="#e8d5b5" />
+      <stop offset="55%" stop-color="#c4a882" />
+      <stop offset="82%" stop-color="#a88758" />
+      <stop offset="100%" stop-color="#9a7d55" />
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.12" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" flood-color="#0c1018" flood-opacity="0.35" />
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" fill="url(#gold)">
+    <text x="0" y="35" font-family="Cormorant Garamond, Georgia, serif" font-size="40" font-weight="500" font-style="italic">S</text>
+    <path d="M5 37.5C16 41 28 39.5 36 36.5C42 34.5 46 31.5 48 28.5" fill="none" stroke="url(#gold)" stroke-width="2.4" stroke-linecap="round" />
+    <path d="M33 36.5L41.5 5.5L49.5 5.5L58 36.5H52.5L50 27H40L37.5 36.5H33ZM41.5 21.5H48.5L45 10.5L41.5 21.5Z" />
+    <rect x="62.5" y="10" width="5" height="26.5" rx="0.5" />
+    <circle cx="65" cy="5.5" r="4.2" />
+  </g>
+  <g fill="url(#shine)" opacity="0.55">
+    <text x="0" y="35" font-family="Cormorant Garamond, Georgia, serif" font-size="40" font-weight="500" font-style="italic">S</text>
+    <path d="M33 36.5L41.5 5.5L49.5 5.5L58 36.5H52.5L50 27H40L37.5 36.5H33ZM41.5 21.5H48.5L45 10.5L41.5 21.5Z" />
+    <rect x="62.5" y="10" width="5" height="26.5" rx="0.5" />
+    <circle cx="65" cy="5.5" r="4.2" />
+  </g>
+</svg>

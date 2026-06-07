@@ -1,11 +1,25 @@
-import { About } from "@/components/sections/About";
-import { AISpecialty } from "@/components/sections/AISpecialty";
-import { Contact } from "@/components/sections/Contact";
-import { Expertise } from "@/components/sections/Expertise";
+import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
-import { Industry } from "@/components/sections/Industry";
 import { Marquee } from "@/components/sections/Marquee";
-import { Platforms } from "@/components/sections/Platforms";
+
+const About = dynamic(() =>
+  import("@/components/sections/About").then((mod) => mod.About),
+);
+const Expertise = dynamic(() =>
+  import("@/components/sections/Expertise").then((mod) => mod.Expertise),
+);
+const Platforms = dynamic(() =>
+  import("@/components/sections/Platforms").then((mod) => mod.Platforms),
+);
+const Industry = dynamic(() =>
+  import("@/components/sections/Industry").then((mod) => mod.Industry),
+);
+const AISpecialty = dynamic(() =>
+  import("@/components/sections/AISpecialty").then((mod) => mod.AISpecialty),
+);
+const Contact = dynamic(() =>
+  import("@/components/sections/Contact").then((mod) => mod.Contact),
+);
 
 export default function HomePage() {
   return (

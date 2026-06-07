@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
@@ -76,7 +76,7 @@ export function Contact() {
           subtitle="Architecture · Integrations · Advisory"
         />
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -84,8 +84,8 @@ export function Contact() {
         >
           Interested in composable commerce, platform integrations, or
           architecture advisory? I&apos;d love to hear from you.
-        </motion.p>
-        <motion.p
+        </m.p>
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -99,11 +99,11 @@ export function Contact() {
           >
             {site.email}
           </a>
-        </motion.p>
+        </m.p>
 
         <AnimatePresence mode="wait">
           {result ? (
-            <motion.div
+            <m.div
               key={result.message}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -115,11 +115,11 @@ export function Contact() {
               }`}
             >
               {result.message}
-            </motion.div>
+            </m.div>
           ) : null}
         </AnimatePresence>
 
-        <motion.form
+        <m.form
           onSubmit={onSubmit}
           className="glass-card space-y-5 rounded-3xl p-5 sm:space-y-6 sm:p-8"
           initial={{ opacity: 0, y: 30 }}
@@ -128,7 +128,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
         >
           {fields.map((field, index) => (
-            <motion.div
+            <m.div
               key={field}
               initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -155,10 +155,10 @@ export function Contact() {
                 className="input-glow w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white outline-none transition sm:text-sm"
                 placeholder={`Enter your ${field}`}
               />
-            </motion.div>
+            </m.div>
           ))}
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -184,17 +184,17 @@ export function Contact() {
               className="input-glow w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white outline-none transition sm:text-sm"
               placeholder="Enter your message"
             />
-          </motion.div>
+          </m.div>
 
-          <motion.button
+          <m.button
             type="submit"
             disabled={loading}
             whileTap={{ scale: 0.97 }}
             className="btn-primary-glow w-full rounded-full px-8 py-3.5 text-xs uppercase tracking-[0.2em] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:text-sm"
           >
             {loading ? "Submitting..." : "Send message"}
-          </motion.button>
-        </motion.form>
+          </m.button>
+        </m.form>
       </div>
     </section>
   );

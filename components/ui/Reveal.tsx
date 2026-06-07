@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { m, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -8,6 +8,7 @@ type RevealProps = {
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right";
+  scale?: boolean;
 };
 
 const offsets = {
@@ -22,21 +23,28 @@ export function Reveal({
   className = "",
   delay = 0,
   direction = "up",
+  scale = false,
 }: RevealProps) {
   const offset = offsets[direction];
 
   const variants: Variants = {
-    hidden: { opacity: 0, x: offset.x, y: offset.y },
+    hidden: {
+      opacity: 0,
+      x: offset.x,
+      y: offset.y,
+      ...(scale ? { scale: 0.92 } : {}),
+    },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
+      scale: 1,
       transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -44,6 +52,6 @@ export function Reveal({
       variants={variants}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

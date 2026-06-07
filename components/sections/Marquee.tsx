@@ -1,5 +1,3 @@
-"use client";
-
 import { site } from "@/lib/site";
 
 function MarqueeRow({

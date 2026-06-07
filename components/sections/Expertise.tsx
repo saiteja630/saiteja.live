@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { m } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
 
 export function Expertise() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<number | null>(null);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showLeftFade, setShowLeftFade] = useState(false);
@@ -17,15 +18,28 @@ export function Expertise() {
   );
 
   const handleScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
+    if (frameRef.current !== null) return;
 
-    const max = el.scrollWidth - el.clientWidth;
-    const scrolled = el.scrollLeft > 8;
+    frameRef.current = window.requestAnimationFrame(() => {
+      frameRef.current = null;
+      const el = scrollRef.current;
+      if (!el) return;
 
-    setHasScrolled(scrolled);
-    setShowLeftFade(scrolled);
-    setProgress(max > 0 ? el.scrollLeft / max : 0);
+      const max = el.scrollWidth - el.clientWidth;
+      const scrolled = el.scrollLeft > 8;
+
+      setHasScrolled(scrolled);
+      setShowLeftFade(scrolled);
+      setProgress(max > 0 ? el.scrollLeft / max : 0);
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -38,7 +52,7 @@ export function Expertise() {
           subtitle="Domain capabilities across the commerce stack"
         />
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -48,7 +62,7 @@ export function Expertise() {
           I architect end-to-end digital commerce solutions — from product data
           foundations and integrations to customer-facing experiences — with
           deep specialization across the luxury retail technology stack.
-        </motion.p>
+        </m.p>
 
         <div className="expertise-carousel">
           <div className="expertise-scroll-wrap">
@@ -67,7 +81,7 @@ export function Expertise() {
               className="expertise-grid"
             >
               {site.expertise.map((item, index) => (
-                <motion.article
+                <m.article
                   key={item.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +99,7 @@ export function Expertise() {
                   <p className="text-sm leading-relaxed text-white/65 sm:text-base">
                     {item.description}
                   </p>
-                </motion.article>
+                </m.article>
               ))}
             </div>
           </div>

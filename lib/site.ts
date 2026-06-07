@@ -1,4 +1,13 @@
 export const site = {
+  /**
+   * Header + favicon logo:
+   * - "tech" — geometric SAi with </> (developer mark)
+   * - "luxury" — interconnected serif SAI in warm gold
+   * - "minimal" — all-white [SAI] wordmark
+   */
+  //logoVariant: "luxury" as "tech" | "luxury" | "minimal",
+  logoVariant: "tech" as "tech" | "luxury" | "minimal",
+
   name: "Sai Teja Madireddy",
   shortName: "Sai Teja",
   role: "Digital Commerce Architect",
@@ -105,6 +114,27 @@ export const site = {
       description:
         "High-consideration purchase journeys, global market launches, and brand-integrity standards unique to jewelry and luxury houses.",
     },
+    {
+      id: "performance",
+      abbreviation: "PERF",
+      title: "Page Speed & Web Performance",
+      description:
+        "Core Web Vitals optimization, bundle splitting, image and font tuning, and edge delivery — building storefronts that score 90+ on Lighthouse without sacrificing design or motion.",
+    },
+    {
+      id: "seo",
+      abbreviation: "SEO",
+      title: "Search Engine Optimization",
+      description:
+        "Technical SEO for headless commerce — semantic markup, metadata, crawlability, structured data, and performance-aligned discoverability across global luxury markets.",
+    },
+    {
+      id: "accessibility",
+      abbreviation: "A11Y",
+      title: "Accessible Web Experiences",
+      description:
+        "WCAG-aligned interfaces with keyboard navigation, screen reader support, reduced-motion respect, and inclusive patterns that meet enterprise and regulatory standards.",
+    },
   ],
   platforms: [
     { name: "AEM Cloud", category: "CMS / Experience" },
@@ -175,11 +205,107 @@ export const site = {
   ],
   industryFocus:
     "I bring deep specialization in luxury retail and jewelry — where precision, brand integrity, and exceptional customer experience are non-negotiable.",
-  aiTopics: [
-    "AI-assisted product enrichment",
-    "Intelligent search & recommendations",
-    "Content automation pipelines",
-    "Composable architecture advisory",
+  aiIntro:
+    "I embed AI into enterprise commerce architectures as governed, production-ready capability — not experimentation. By connecting LLMs, semantic search, computer vision, and event-driven pipelines to PIM, DAM, storefront, and integration layers, teams gain faster enrichment, sharper discovery, and brand-safe content at luxury retail scale.",
+  aiTechnologies: [
+    {
+      name: "LLMs & GenAI APIs",
+      description:
+        "Azure OpenAI, AWS Bedrock, and API-first model access for attribute generation, translation, and brand-tone copy — orchestrated through Node.js and Python services.",
+    },
+    {
+      name: "RAG & Knowledge Retrieval",
+      description:
+        "Grounded generation using product catalogs, style guides, and DAM metadata so outputs stay accurate, on-brand, and auditable for regulated luxury content.",
+    },
+    {
+      name: "Vector Search & Embeddings",
+      description:
+        "Semantic product discovery beyond keywords — embedding pipelines paired with Algolia NeuralSearch and vector indexes for intuitive, high-consideration shopping.",
+    },
+    {
+      name: "ML-Enhanced Search",
+      description:
+        "Algolia AI Synonyms, query categorization, and personalization rules that improve findability across large, attribute-rich jewelry and luxury catalogs.",
+    },
+    {
+      name: "Computer Vision & DAM AI",
+      description:
+        "Automated tagging, metadata enrichment, and asset classification for AEM Assets and enterprise DAM — accelerating global media operations.",
+    },
+    {
+      name: "Event-Driven AI Pipelines",
+      description:
+        "Async enrichment via MuleSoft, webhooks, and queue-based workflows triggered on product publish, asset upload, or catalog change events.",
+    },
+  ],
+  aiImplementations: [
+    {
+      domain: "PIM / PXM",
+      title: "Intelligent Product Enrichment",
+      description:
+        "Embed AI inside Akeneo enrichment workflows to draft descriptions, infer attributes from specs, and accelerate multi-locale localization — with human-in-the-loop review for brand integrity.",
+      examples: [
+        "Attribute inference from technical specs",
+        "Brand-tone description generation",
+        "Translation & localization assist",
+      ],
+    },
+    {
+      domain: "Search & Discovery",
+      title: "AI-Powered Findability",
+      description:
+        "Layer Algolia AI capabilities with custom embedding strategies so customers discover products through natural language, visual similarity, and personalized ranking.",
+      examples: [
+        "NeuralSearch & semantic matching",
+        "AI synonym & query understanding",
+        "Personalized ranking & merchandising",
+      ],
+    },
+    {
+      domain: "DAM & Assets",
+      title: "Visual Intelligence for Media",
+      description:
+        "Apply computer vision to auto-tag, classify, and enrich assets in AEM Assets and DAM systems — reducing manual metadata work while preserving governance standards.",
+      examples: [
+        "Auto-tagging & smart metadata",
+        "Duplicate & quality detection",
+        "Asset-to-product linking",
+      ],
+    },
+    {
+      domain: "Ecommerce & Storefront",
+      title: "Conversational & Guided Commerce",
+      description:
+        "Integrate AI assistants and recommendation engines into SFCC and headless Next.js storefronts for guided selling, cross-sell logic, and premium clienteling experiences.",
+      examples: [
+        "Product Q&A grounded in PIM data",
+        "Recommendation & cross-sell engines",
+        "Clienteling & advisor tooling",
+      ],
+    },
+    {
+      domain: "Omnichannel",
+      title: "Consistent AI Across Channels",
+      description:
+        "Serve the same governed product narratives and discovery intelligence across web, mobile, retail POS, and partner channels via API-first, composable AI services.",
+      examples: [
+        "Unified enrichment APIs",
+        "Channel-aware content variants",
+        "Store associate knowledge assist",
+      ],
+    },
+    {
+      domain: "Integration & Governance",
+      title: "Governed AI Operations",
+      description:
+        "Architect MuleSoft and event-driven pipelines with guardrails — prompt versioning, audit trails, PII filtering, and quality scoring so AI scales safely in enterprise programs.",
+      examples: [
+        "MuleSoft-orchestrated AI workflows",
+        "Data quality & anomaly detection",
+        "Prompt governance & audit logging",
+      ],
+    },
   ],
   marqueeTags: [
     "PIM",
@@ -196,6 +322,9 @@ export const site = {
     "Luxury Retail",
     "Data Governance",
     "Headless Commerce",
+    "Web Performance",
+    "SEO",
+    "Accessibility",
     "AI Enablement",
     "Solution Architecture",
     "Java",
@@ -209,20 +338,17 @@ export const site = {
     {
       name: "LinkedIn",
       href: "https://www.linkedin.com/in/saitejamadireddy/",
-      iconUrl:
-        "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg",
+      iconUrl: "/icons/linkedin.svg",
     },
     {
       name: "Facebook",
       href: "https://www.facebook.com/saiteja630",
-      iconUrl:
-        "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg",
+      iconUrl: "/icons/facebook.svg",
     },
     {
       name: "Instagram",
       href: "https://www.instagram.com/saiteja630/",
-      iconUrl:
-        "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg",
+      iconUrl: "/icons/instagram.svg",
     },
   ],
 } as const;

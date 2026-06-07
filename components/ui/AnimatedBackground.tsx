@@ -1,26 +1,14 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export function AnimatedBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      className="animated-background pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     >
-      <div className="blueprint-grid-animated-slow absolute inset-[-64px]" />
-      <div className="blueprint-grid-animated absolute inset-[-32px]" />
+      <div className="blueprint-grid-slow absolute inset-0" />
+      <div className="blueprint-grid absolute inset-0 opacity-50" />
       <div className="absolute inset-0 bg-mesh" />
-      <motion.div
-        className="orb orb-1"
-        animate={{ x: [0, 20, -15, 0], y: [0, -25, 15, 0] }}
-        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="orb orb-2"
-        animate={{ x: [0, -25, 20, 0], y: [0, 20, -20, 0] }}
-        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div className="orb orb-1" />
+      <div className="orb orb-2" />
       <div className="noise-overlay" />
     </div>
   );
