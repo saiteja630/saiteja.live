@@ -1,68 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# saiteja.live
 
-## Available Scripts
+Personal portfolio for Sai Teja Madireddy — Digital Commerce Architect specializing in luxury commerce, PIM, search, DAM, and composable digital platforms.
 
-In the project directory, you can run:
+## Stack
 
-### `yarn start`
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Local development
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+npm install
+npm run dev
+```
 
-### `yarn test`
+Open [http://localhost:3000](http://localhost:3000).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Build
 
-### `yarn build`
+```bash
+npm run build
+npm start
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deploy on Vercel
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Import this repository into [Vercel](https://vercel.com).
+2. Set the production domain to `saiteja.live`.
+3. Contact form env vars ([Resend](https://resend.com)):
+   - `RESEND_API_KEY` — API key from your Resend dashboard
+   - `CONTACT_TO_EMAIL` — inbox that receives submissions (defaults to `site.email`)
+   - `CONTACT_FROM_EMAIL` — sender address (`onboarding@resend.dev` for testing; use `contact@saiteja.live` after domain verification)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create `.env.local` with the same variables for local testing.
 
-### `yarn eject`
+## Content
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+All site copy, expertise domains, and platform listings live in [`lib/site.ts`](lib/site.ts).
