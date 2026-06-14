@@ -70,7 +70,7 @@ export function Contact() {
     <section className="section-shell">
       <div className="mx-auto max-w-3xl">
         <SectionHeading
-          lead="c"
+          lead="C"
           trail="ontact"
           id="contact"
           subtitle="Architecture · Integrations · Advisory"
