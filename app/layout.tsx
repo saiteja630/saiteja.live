@@ -7,6 +7,7 @@ import { ZoomMotionGuard } from "@/components/ZoomMotionGuard";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { getJsonLd } from "@/lib/json-ld";
 import { getLogoIconPath } from "@/lib/logo";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -60,12 +61,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = getJsonLd();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.dataset.theme="light";}catch(e){}})();`,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd),
           }}
         />
       </head>

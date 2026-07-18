@@ -6,7 +6,15 @@ type ContactPayload = {
   email?: string;
   subject?: string;
   message?: string;
+  website?: string;
 };
+
+const LIMITS = {
+  name: 100,
+  email: 254,
+  subject: 200,
+  message: 5000,
+} as const;
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -21,7 +29,60 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+function stripControlChars(value: string) {
+  return value.replace(/[\r\n\u0000-\u001f\u007f]/g, " ").trim();
+}
+
+function allowedHosts(): Set<string> {
+  const hosts = new Set<string>();
+  try {
+    const primary = new URL(site.url).hostname;
+    hosts.add(primary);
+    hosts.add(primary.startsWith("www.") ? primary.slice(4) : `www.${primary}`);
+  } catch {
+    // site.url is static; ignore parse failures
+  }
+  hosts.add("localhost");
+  hosts.add("127.0.0.1");
+  if (process.env.VERCEL_URL) {
+    hosts.add(process.env.VERCEL_URL.replace(/^https?:\/\//, ""));
+  }
+  return hosts;
+}
+
+function isAllowedOrigin(request: Request): boolean {
+  const allowed = allowedHosts();
+  const origin = request.headers.get("origin");
+  if (origin) {
+    try {
+      return allowed.has(new URL(origin).hostname);
+    } catch {
+      return false;
+    }
+  }
+
+  const referer = request.headers.get("referer");
+  if (referer) {
+    try {
+      return allowed.has(new URL(referer).hostname);
+    } catch {
+      return false;
+    }
+  }
+
+  // Browsers always send Origin on cross-site fetch; same-origin POSTs
+  // from our form include Origin. Reject requests with neither.
+  return false;
+}
+
 export async function POST(request: Request) {
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json(
+      { success: false, message: "Forbidden." },
+      { status: 403 },
+    );
+  }
+
   let payload: ContactPayload;
 
   try {
@@ -33,14 +94,34 @@ export async function POST(request: Request) {
     );
   }
 
+  // Honeypot — bots fill hidden fields; pretend success without sending.
+  if (payload.website?.trim()) {
+    return NextResponse.json({
+      success: true,
+      message: "Thank you. Your message has been sent.",
+    });
+  }
+
   const name = payload.name?.trim() ?? "";
   const email = payload.email?.trim() ?? "";
-  const subject = payload.subject?.trim() ?? "";
+  const subject = stripControlChars(payload.subject?.trim() ?? "");
   const message = payload.message?.trim() ?? "";
 
   if (!name || !email || !subject || !message) {
     return NextResponse.json(
       { success: false, message: "Please complete all required fields." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    name.length > LIMITS.name ||
+    email.length > LIMITS.email ||
+    subject.length > LIMITS.subject ||
+    message.length > LIMITS.message
+  ) {
+    return NextResponse.json(
+      { success: false, message: "One or more fields exceed the allowed length." },
       { status: 400 },
     );
   }
@@ -58,10 +139,13 @@ export async function POST(request: Request) {
     process.env.CONTACT_FROM_EMAIL ?? "onboarding@resend.dev";
 
   if (!resendApiKey) {
-    return NextResponse.json({
-      success: true,
-      message: `Message received. Email delivery is not configured yet — please reach out directly at ${site.email}.`,
-    });
+    return NextResponse.json(
+      {
+        success: false,
+        message: `Email delivery is not configured. Please reach out directly at ${site.email}.`,
+      },
+      { status: 503 },
+    );
   }
 
   try {

@@ -11,6 +11,7 @@ type FormState = {
   email: string;
   subject: string;
   message: string;
+  website: string;
 };
 
 type FormResult = {
@@ -23,7 +24,15 @@ const initialState: FormState = {
   email: "",
   subject: "",
   message: "",
+  website: "",
 };
+
+const FIELD_MAX = {
+  name: 100,
+  email: 254,
+  subject: 200,
+  message: 5000,
+} as const;
 
 const fields = ["name", "email", "subject"] as const;
 
@@ -127,7 +136,7 @@ export function Contact() {
 
         <m.form
           onSubmit={onSubmit}
-          className="glass-card space-y-5 rounded-3xl p-5 sm:space-y-6 sm:p-8"
+          className="glass-card relative space-y-5 rounded-3xl p-5 sm:space-y-6 sm:p-8"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -158,6 +167,7 @@ export function Contact() {
                 onFocus={() => setFocused(field)}
                 onBlur={() => setFocused(null)}
                 required
+                maxLength={FIELD_MAX[field]}
                 className="input-glow w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white outline-none transition sm:text-sm"
                 placeholder={`Enter your ${field}`}
               />
@@ -187,10 +197,27 @@ export function Contact() {
               onFocus={() => setFocused("message")}
               onBlur={() => setFocused(null)}
               required
+              maxLength={FIELD_MAX.message}
               className="input-glow w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white outline-none transition sm:text-sm"
               placeholder="Enter your message"
             />
           </m.div>
+
+          <div
+            aria-hidden="true"
+            className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+          >
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              name="website"
+              type="text"
+              value={form.website}
+              onChange={onChange}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
 
           <m.button
             type="submit"
