@@ -5,6 +5,7 @@ import { SiteLogo } from "@/components/ui/SiteLogo";
 import { AnimatePresence, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { trackEvent } from "@/lib/umami";
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -44,7 +45,10 @@ export function Header() {
           <Link
             href="/"
             className="relative z-50 flex items-center transition-opacity hover:opacity-90"
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              trackEvent("nav-home");
+            }}
             aria-label="Sai Teja — home"
           >
             <SiteLogo />
@@ -57,6 +61,12 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   className="rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/65 transition hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] lg:text-sm"
+                  onClick={() =>
+                    trackEvent("nav-click", {
+                      section: item.label.toLowerCase(),
+                      source: "desktop",
+                    })
+                  }
                 >
                   {item.label}
                 </Link>
@@ -70,7 +80,13 @@ export function Header() {
               className="relative flex h-11 w-11 items-center justify-center rounded-full border border-[var(--accent)]/25 bg-[var(--toggle-bg)] md:hidden"
               aria-label={open ? "Close navigation" : "Open navigation"}
               aria-expanded={open}
-              onClick={() => setOpen((value) => !value)}
+              onClick={() => {
+                setOpen((value) => {
+                  const next = !value;
+                  trackEvent(next ? "nav-mobile-open" : "nav-mobile-close");
+                  return next;
+                });
+              }}
             >
               <span
                 className={`absolute h-0.5 w-5 bg-[var(--accent)] transition-all duration-300 ${
@@ -113,7 +129,13 @@ export function Header() {
                   <Link
                     href={item.href}
                     className="font-display block py-4 text-3xl font-light uppercase tracking-[0.12em] text-white/90 transition hover:text-[var(--accent)]"
-                    onClick={() => setOpen(false)}
+                    onClick={() => {
+                      setOpen(false);
+                      trackEvent("nav-click", {
+                        section: item.label.toLowerCase(),
+                        source: "mobile",
+                      });
+                    }}
                   >
                     {item.label}
                   </Link>

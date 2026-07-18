@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import { AnimatePresence, m } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { trackEvent } from "@/lib/umami";
 import { site } from "@/lib/site";
 
 type FormState = {
@@ -55,8 +56,12 @@ export function Contact() {
 
       if (data.success) {
         setForm(initialState);
+        trackEvent("contact-submit", { status: "success" });
+      } else {
+        trackEvent("contact-submit", { status: "error" });
       }
     } catch {
+      trackEvent("contact-submit", { status: "error" });
       setResult({
         success: false,
         message: "Something went wrong. Try again later.",
@@ -96,6 +101,7 @@ export function Contact() {
           <a
             href={`mailto:${site.email}`}
             className="underline decoration-[var(--accent)] underline-offset-4 transition hover:text-white"
+            data-umami-event="contact-mailto"
           >
             {site.email}
           </a>

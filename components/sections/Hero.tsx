@@ -38,12 +38,16 @@ export function Hero() {
             <Link
               href="/#expertise"
               className="btn-primary-glow inline-flex items-center justify-center rounded-full px-8 py-3 text-xs uppercase tracking-[0.18em] sm:text-sm"
+              data-umami-event="hero-explore-expertise"
+              data-umami-event-section="expertise"
             >
               Explore expertise
             </Link>
             <Link
               href="/#contact"
               className="btn-outline inline-flex items-center justify-center rounded-full px-8 py-3 text-xs uppercase tracking-[0.18em] sm:text-sm"
+              data-umami-event="hero-get-in-touch"
+              data-umami-event-section="contact"
             >
               Get in touch
             </Link>

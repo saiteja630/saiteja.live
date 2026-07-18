@@ -23,6 +23,8 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label={item.name}
               className="social-link transition"
+              data-umami-event="social-click"
+              data-umami-event-network={item.name.toLowerCase()}
             >
               <img
                 src={item.iconUrl}

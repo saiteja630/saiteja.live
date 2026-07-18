@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Raleway } from "next/font/google";
 import { MotionProvider } from "@/components/MotionProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { UmamiAnalytics } from "@/components/UmamiAnalytics";
 import { ZoomMotionGuard } from "@/components/ZoomMotionGuard";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
 import { Footer } from "@/components/layout/Footer";
@@ -69,6 +70,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${raleway.variable} ${cormorant.variable} antialiased`}>
+        <UmamiAnalytics />
         <ThemeProvider>
           <MotionProvider>
             <ZoomMotionGuard />
