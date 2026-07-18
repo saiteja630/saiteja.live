@@ -30,18 +30,19 @@ export function Hero() {
             {site.tagline}
           </p>
 
-          <div className="hero-enter hero-enter-5 mt-6 flex justify-center sm:mt-8 lg:justify-start">
-            <span className="location-chip">{site.locationShort}</span>
-          </div>
+          <p className="hero-enter hero-enter-5 mx-auto mt-5 max-w-lg text-xs uppercase tracking-[0.14em] text-white/45 sm:mt-6 lg:mx-0 sm:text-[0.7rem]">
+            Currently · {site.employer} ({site.employerGroup}) · {site.education} ·{" "}
+            {site.locationShort}
+          </p>
 
           <div className="hero-enter hero-enter-6 mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center sm:gap-4 lg:justify-start">
             <Link
-              href="/#expertise"
+              href="/#work"
               className="btn-primary-glow inline-flex items-center justify-center rounded-full px-8 py-3 text-xs uppercase tracking-[0.18em] sm:text-sm"
-              data-umami-event="hero-explore-expertise"
-              data-umami-event-section="expertise"
+              data-umami-event="hero-view-work"
+              data-umami-event-section="work"
             >
-              Explore expertise
+              View work
             </Link>
             <Link
               href="/#contact"

@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const linkedIn = site.social.find((item) => item.name === "LinkedIn");
 
   return (
     <footer
@@ -14,20 +16,33 @@ export function Footer() {
           <div>All rights reserved.</div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:justify-end">
-          {site.social.map((item) => (
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 md:justify-end">
+          <Link
+            href="/work"
+            className="text-xs uppercase tracking-[0.2em] text-white/55 transition hover:text-[var(--accent)]"
+            data-umami-event="footer-work"
+          >
+            Work
+          </Link>
+          <Link
+            href="/#contact"
+            className="text-xs uppercase tracking-[0.2em] text-white/55 transition hover:text-[var(--accent)]"
+            data-umami-event="footer-contact"
+          >
+            Contact
+          </Link>
+          {linkedIn ? (
             <a
-              key={item.name}
-              href={item.href}
+              href={linkedIn.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={item.name}
+              aria-label={linkedIn.name}
               className="social-link transition"
               data-umami-event="social-click"
-              data-umami-event-network={item.name.toLowerCase()}
+              data-umami-event-network="linkedin"
             >
               <img
-                src={item.iconUrl}
+                src={linkedIn.iconUrl}
                 alt=""
                 width={48}
                 height={48}
@@ -36,7 +51,7 @@ export function Footer() {
                 decoding="async"
               />
             </a>
-          ))}
+          ) : null}
         </div>
       </div>
     </footer>

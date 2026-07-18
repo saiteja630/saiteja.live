@@ -10,6 +10,13 @@ export const ogContentType = "image/png";
 
 export const ogAlt = `${site.name} — ${site.role}`;
 
+type OgImageOptions = {
+  title?: string;
+  subtitle?: string;
+  eyebrow?: string;
+  footerNote?: string;
+};
+
 /** Older Safari UA so Google Fonts returns TTF/OTF (Satori cannot use woff2). */
 const FONT_UA =
   "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1";
@@ -32,7 +39,14 @@ async function loadGoogleFont(family: string, weight: number) {
   }
 }
 
-export async function generateOgImage() {
+export async function generateOgImage(options: OgImageOptions = {}) {
+  const {
+    title = site.name,
+    subtitle = site.role,
+    eyebrow = "Luxury Commerce · Digital Architecture",
+    footerNote = "Architecting composable commerce for luxury retail",
+  } = options;
+
   const [displayFont, bodyFont] = await Promise.all([
     loadGoogleFont("Cormorant Garamond", 400),
     loadGoogleFont("Raleway", 500),
@@ -62,6 +76,8 @@ export async function generateOgImage() {
     weight: 400 | 500;
   }[];
 
+  const titleSize = title.length > 60 ? 48 : title.length > 40 ? 56 : 72;
+
   return new ImageResponse(
     (
       <div
@@ -89,7 +105,7 @@ export async function generateOgImage() {
             color: "#7eb8da",
           }}
         >
-          Luxury Commerce · Digital Architecture
+          {eyebrow}
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -97,23 +113,24 @@ export async function generateOgImage() {
             style={{
               display: "flex",
               fontFamily: displayFont ? "Cormorant Garamond" : "serif",
-              fontSize: 84,
-              lineHeight: 1.05,
+              fontSize: titleSize,
+              lineHeight: 1.1,
               letterSpacing: "-0.02em",
               fontWeight: 400,
+              maxWidth: 1000,
             }}
           >
-            {site.name}
+            {title}
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 34,
+              fontSize: 28,
               color: "rgba(236, 234, 230, 0.78)",
               letterSpacing: "0.02em",
             }}
           >
-            {site.role}
+            {subtitle}
           </div>
         </div>
 
@@ -129,12 +146,12 @@ export async function generateOgImage() {
             style={{
               display: "flex",
               maxWidth: 780,
-              fontSize: 24,
+              fontSize: 22,
               lineHeight: 1.45,
               color: "rgba(236, 234, 230, 0.62)",
             }}
           >
-            Architecting composable commerce for luxury retail
+            {footerNote}
           </div>
           <div
             style={{

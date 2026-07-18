@@ -34,7 +34,16 @@ const FIELD_MAX = {
   message: 5000,
 } as const;
 
-const fields = ["name", "email", "subject"] as const;
+const fields = ["name", "email"] as const;
+
+const subjectPresets = [
+  "Architecture advisory",
+  "Performance review",
+  "PIM / product data",
+  "AI enrichment",
+  "Hiring conversation",
+  "Other",
+] as const;
 
 export function Contact() {
   const [form, setForm] = useState<FormState>(initialState);
@@ -114,6 +123,16 @@ export function Contact() {
           >
             {site.email}
           </a>
+          {" · "}
+          <a
+            href={site.social[0]?.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-[var(--accent)] underline-offset-4 transition hover:text-white"
+            data-umami-event="contact-linkedin"
+          >
+            LinkedIn
+          </a>
         </m.p>
 
         <AnimatePresence mode="wait">
@@ -173,6 +192,53 @@ export function Contact() {
               />
             </m.div>
           ))}
+
+          <m.div
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.16 }}
+          >
+            <label
+              htmlFor="subject"
+              className={`mb-2 block text-xs uppercase tracking-[0.2em] transition ${
+                focused === "subject" ? "text-[var(--accent)]" : "text-white/55"
+              }`}
+            >
+              subject
+            </label>
+            <div className="mb-3 flex flex-wrap gap-2">
+              {subjectPresets.map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() =>
+                    setForm((current) => ({ ...current, subject: preset }))
+                  }
+                  className={`rounded-full border px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] transition ${
+                    form.subject === preset
+                      ? "border-[var(--accent)]/50 bg-[var(--accent)]/15 text-[var(--accent)]"
+                      : "border-white/15 text-white/50 hover:border-[var(--accent)]/30 hover:text-white/80"
+                  }`}
+                >
+                  {preset}
+                </button>
+              ))}
+            </div>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              value={form.subject}
+              onChange={onChange}
+              onFocus={() => setFocused("subject")}
+              onBlur={() => setFocused(null)}
+              required
+              maxLength={FIELD_MAX.subject}
+              className="input-glow w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white outline-none transition sm:text-sm"
+              placeholder="Or type a custom subject"
+            />
+          </m.div>
 
           <m.div
             initial={{ opacity: 0, x: -16 }}

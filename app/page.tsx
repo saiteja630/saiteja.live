@@ -5,6 +5,9 @@ import { Marquee } from "@/components/sections/Marquee";
 const About = dynamic(() =>
   import("@/components/sections/About").then((mod) => mod.About),
 );
+const SelectedWork = dynamic(() =>
+  import("@/components/sections/SelectedWork").then((mod) => mod.SelectedWork),
+);
 const Expertise = dynamic(() =>
   import("@/components/sections/Expertise").then((mod) => mod.Expertise),
 );
@@ -27,6 +30,7 @@ export default function HomePage() {
       <Hero />
       <Marquee />
       <About />
+      <SelectedWork />
       <Expertise />
       <Platforms />
       <Industry />

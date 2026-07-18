@@ -9,6 +9,7 @@ import { trackEvent } from "@/lib/umami";
 
 const navItems = [
   { label: "About", href: "/#about" },
+  { label: "Work", href: "/work" },
   { label: "Expertise", href: "/#expertise" },
   { label: "Platforms", href: "/#platforms" },
   { label: "Contact", href: "/#contact" },

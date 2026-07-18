@@ -340,15 +340,5 @@ export const site = {
       href: "https://www.linkedin.com/in/saitejamadireddy/",
       iconUrl: "/icons/linkedin.svg",
     },
-    {
-      name: "Facebook",
-      href: "https://www.facebook.com/saiteja630",
-      iconUrl: "/icons/facebook.svg",
-    },
-    {
-      name: "Instagram",
-      href: "https://www.instagram.com/saiteja630/",
-      iconUrl: "/icons/instagram.svg",
-    },
   ],
 } as const;
